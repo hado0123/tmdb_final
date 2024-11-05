@@ -47,6 +47,13 @@ export const getMovieDetails = (movieId) => {
    })
 }
 
+// 출연 배우 정보 가져오기
+export const getMovieCredits = (movieId) => {
+   return fetchFromApi(`/movie/${movieId}/credits`, {
+      language: 'ko-KR',
+   })
+}
+
 // 인기, 방송 중인 tv 목록 가져오기
 export const getTVs = (type = 'popular', page = 1) => {
    // type에 따라 엔드포인트 동적으로 설정

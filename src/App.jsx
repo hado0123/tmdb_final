@@ -11,7 +11,7 @@ function App() {
          <Route path="/popular" element={<MovieCategory category="popular" />} />
          <Route path="/now_playing" element={<MovieCategory category="now_playing" />} />
          <Route path="/upcoming" element={<MovieCategory category="upcoming" />} />
-         <Route path="/detail/:movie_id" element={<Detail />} />
+         <Route path="/detail/:movieId" element={<Detail />} />
          <Route path="/*" element={<NotFound />} />
       </Routes>
    )

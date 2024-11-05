@@ -17,7 +17,18 @@ function MovieCard({ movies }) {
                   <Card sx={{ maxWidth: 345 }}>
                      <CardMedia sx={{ height: 400 }} image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} title={movie.title} />
                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 17 }}>
+                        <Typography
+                           gutterBottom
+                           variant="h5"
+                           component="div"
+                           sx={{
+                              fontSize: 17,
+                              whiteSpace: 'nowrap', // 한 줄로 설정
+                              overflow: 'hidden', // 넘치는 텍스트 숨김
+                              textOverflow: 'ellipsis', // 말줄임표 적용
+                              width: '200px', // 최대 너비 설정
+                           }}
+                        >
                            {movie.title}
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>

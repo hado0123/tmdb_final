@@ -3,7 +3,7 @@ import './css/Footer.css'
 function Footer() {
    return (
       <footer>
-         <p>Footer</p>
+         <p>TMDB Footer</p>
       </footer>
    )
 }
