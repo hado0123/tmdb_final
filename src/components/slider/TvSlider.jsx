@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchTVs } from '../../features/tvs/tvsSlice'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 
 import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import '../css/PosterSlider.css'
 
 function TvSlider() {
@@ -23,15 +23,7 @@ function TvSlider() {
 
    return (
       <>
-         <Swiper
-            slidesPerView={5}
-            spaceBetween={30}
-            pagination={{
-               clickable: true,
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-         >
+         <Swiper slidesPerView={5} spaceBetween={30} navigation={true} modules={[Navigation]} className="mySwiper">
             {tvs.map((tv) => (
                <SwiperSlide key={tv.id}>
                   <img src={`https://image.tmdb.org/t/p/w200${tv.poster_path}`} alt={tv.title} />

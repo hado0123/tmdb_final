@@ -1,12 +1,12 @@
-// https://swiperjs.com/demos#slides-per-view
+// https://swiperjs.com/demos#navigation
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../features/movies/moviesSlice'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 
 import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import '../css/PosterSlider.css'
 
 function PosterSlider() {
@@ -14,7 +14,7 @@ function PosterSlider() {
    const { movies, loading, error } = useSelector((state) => state.movies)
 
    useEffect(() => {
-      dispatch(fetchMovies('now_playing'))
+      dispatch(fetchMovies({ category: 'now_playing', page: 1 }))
    }, [dispatch])
 
    if (loading) return <p>Loading...</p>
@@ -22,20 +22,13 @@ function PosterSlider() {
 
    return (
       <>
-         <Swiper
-            slidesPerView={5}
-            spaceBetween={30}
-            pagination={{
-               clickable: true,
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-         >
-            {movies.map((movie) => (
-               <SwiperSlide key={movie.id}>
-                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-               </SwiperSlide>
-            ))}
+         <Swiper slidesPerView={5} spaceBetween={30} navigation={true} modules={[Navigation]} className="mySwiper">
+            {movies &&
+               movies.map((movie) => (
+                  <SwiperSlide key={movie.id}>
+                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                  </SwiperSlide>
+               ))}
          </Swiper>
       </>
    )

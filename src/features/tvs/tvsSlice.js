@@ -4,7 +4,7 @@ import { getTVs } from '../../api/tmdbApi'
 // 비동기 Thunk 액션: TV 목록을 API로부터 가져옴
 export const fetchTVs = createAsyncThunk('tv/fetchTVs', async (type) => {
    const response = await getTVs(type)
-   return response
+   return response.data.results
 })
 
 // Slice 생성
@@ -24,7 +24,7 @@ const tvsSlice = createSlice({
          })
          .addCase(fetchTVs.fulfilled, (state, action) => {
             state.loading = false
-            state.tvs = action.payload.data.results
+            state.tvs = action.payload
          })
          .addCase(fetchTVs.rejected, (state, action) => {
             state.loading = false
