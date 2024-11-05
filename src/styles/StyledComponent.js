@@ -10,4 +10,5 @@ export const Main = styled.main`
    width: ${(props) => props.width || '1200px'};
    margin: 0 auto;
    overflow: hidden;
+   padding: 30px 0;
 `

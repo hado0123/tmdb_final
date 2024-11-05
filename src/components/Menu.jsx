@@ -15,7 +15,7 @@ function Menu() {
                   <Link to="/popular">인기영화</Link>
                </li>
                <li>
-                  <Link to="/now">현재 상영 중</Link>
+                  <Link to="/now_playing">현재 상영 중</Link>
                </li>
                <li>
                   <Link to="/upcoming">개봉 예정</Link>

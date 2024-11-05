@@ -1,24 +1,13 @@
-// https://swiperjs.com/demos#slides-per-view
+// https://swiperjs.com/demos#default
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-
 import 'swiper/css'
-import 'swiper/css/pagination'
-import './css/PosterSlider.css'
+import '../css/FullSlider.css'
 
-function PosterSlider() {
+function FullSlider() {
    return (
       <>
-         <Swiper
-            slidesPerView={5}
-            spaceBetween={30}
-            pagination={{
-               clickable: true,
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-         >
+         <Swiper className="mySwiper">
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
@@ -33,4 +22,4 @@ function PosterSlider() {
    )
 }
 
-export default PosterSlider
+export default FullSlider
