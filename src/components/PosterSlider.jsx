@@ -5,9 +5,9 @@ import { Pagination } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
-import './css/Slider.css'
+import './css/PosterSlider.css'
 
-function Slider() {
+function PosterSlider() {
    return (
       <>
          <Swiper
@@ -33,4 +33,4 @@ function Slider() {
    )
 }
 
-export default Slider
+export default PosterSlider

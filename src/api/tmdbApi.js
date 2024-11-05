@@ -9,7 +9,7 @@ const tmdbApi = axios.create({
    baseURL: BASE_URL,
    headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${AUTH_KEY}`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDI5ZmIzYTNiOGFkZjkzYzNkNTQxNDU4OTczNzA0OSIsIm5iZiI6MTczMDUzNTYxOC41NTE3OTcyLCJzdWIiOiI2MjRkNDM0MWMzOTI2NjAwNGY5Mjk4YmUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.O5nRjv35TxNUAD_5FX1de7mEJhnIZt5qv3f4dCT7Pi4`,
    },
 })
 
@@ -27,7 +27,11 @@ export const getMovies = async (page = 1) => {
 
 // 영화 상세 정보 가져오기
 export const getMovieDetails = async (movieId) => {
-   const response = await tmdbApi.get(`/movie/${movieId}`)
+   const response = await tmdbApi.get(`/movie/${movieId}`, {
+      params: {
+         language: 'ko-KR',
+      },
+   })
    return response
 }
 
