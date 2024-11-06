@@ -3,6 +3,7 @@ import { Route, Routes, Link } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Detail from './pages/Detail'
 import MovieCategory from './pages/MovieCategory'
+import SearchResults from './pages/SearchResults'
 
 function App() {
    return (
@@ -12,6 +13,7 @@ function App() {
          <Route path="/now_playing" element={<MovieCategory category="now_playing" />} />
          <Route path="/upcoming" element={<MovieCategory category="upcoming" />} />
          <Route path="/detail/:movieId" element={<Detail />} />
+         <Route path="/search" element={<SearchResults />} />
          <Route path="/*" element={<NotFound />} />
       </Routes>
    )

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getMovies, getMovieDetails, getMovieCredits } from '../../api/tmdbApi'
+import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../../api/tmdbApi'
 
 /*
 createAsyncThunk의 async 함수에서 매개변수로 여러 값을 받으려면, 두 가지 방식
@@ -30,6 +30,12 @@ export const fetchMovieCredits = createAsyncThunk('movies/fetchMovieCredits', as
 
    // 상세 정보에서 필요한 데이터만 반환
    return response.data // 또는 필요한 데이터 구조에 맞게 수정
+})
+
+// 검색어로 영화, TV 프로그램 검색
+export const fetchSearchResults = createAsyncThunk('movies/fetchSearchResults', async ({ query, page }) => {
+   const response = await searchMovie(query, page)
+   return response.data.results // API 응답에서 필요한 데이터만 반환
 })
 
 // Slice 생성
@@ -86,6 +92,24 @@ const moviesSlice = createSlice({
             state.movieCredits = action.payload // 출연 배우 정보를 상태에 저장
          })
          .addCase(fetchMovieCredits.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+         })
+         .addCase(fetchSearchResults.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetchSearchResults.fulfilled, (state, action) => {
+            state.loading = false
+            // state.searchResults = action.payload // 검색 결과 상태에 저장
+
+            if (action.meta.arg.page === 1) {
+               state.searchResults = action.payload
+            } else {
+               state.searchResults = [...state.searchResults, ...action.payload]
+            }
+         })
+         .addCase(fetchSearchResults.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
          })

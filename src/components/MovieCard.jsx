@@ -15,7 +15,11 @@ function MovieCard({ movies }) {
             <Grid size={2.4} key={movie.id}>
                <Link to={`/detail/${movie.id}`} style={{ textDecoration: 'none' }}>
                   <Card sx={{ maxWidth: 345 }}>
-                     <CardMedia sx={{ height: 400 }} image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} title={movie.title} />
+                     <CardMedia
+                        sx={{ height: 400 }}
+                        image={movie.poster_path ? `https://image.tmdb.org/t/p/w400${movie.poster_path}` : '/images/poster.png'}
+                        title={movie.title || '영화이미지'}
+                     />
                      <CardContent>
                         <Typography
                            gutterBottom

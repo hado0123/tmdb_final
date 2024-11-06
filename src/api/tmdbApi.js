@@ -55,16 +55,27 @@ export const getMovieCredits = (movieId) => {
 }
 
 // 인기, 방송 중인 tv 목록 가져오기
-export const getTVs = (type = 'popular', page = 1) => {
+export const getTVs = (type, page = 1) => {
    // type에 따라 엔드포인트 동적으로 설정
    const endpoint = {
       popular: '/tv/popular',
       nowPlaying: '/tv/on_the_air',
-   }[type] // 기본값을 'popular'로 설정
+   }[type]
 
    return fetchFromApi(endpoint, {
       language: 'ko-KR',
       page,
+      region: 'KR',
+   })
+}
+
+// 검색 API 호출 함수
+export const searchMovie = (query, page = 1) => {
+   return fetchFromApi('/search/movie', {
+      query, // 검색어
+      page, // 페이지 번호 (기본값 1)
+      language: 'ko-KR', // 언어 설정
+      include_adult: false, // 성인 콘텐츠 제외
       region: 'KR',
    })
 }
