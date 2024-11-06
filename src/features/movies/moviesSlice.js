@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getMovies, getMovieDetails, getMovieCredits } from '../../api/tmdbApi'
 
+/*
+createAsyncThunk의 async 함수에서 매개변수로 여러 값을 받으려면, 두 가지 방식
+-객체로 전달: category와 page를 객체로 묶어서 전달하는 방법.
+-배열로 전달: category와 page를 배열로 전달하는 방법.
+현재 코드에서는 async (category, page)로 두 개의 매개변수를 전달하고 있는데, createAsyncThunk에서 payloadCreator 함수는 기본적으로 하나의 인자만 받을 수 있기 때문에 문제가 발생할 수 있음. 객체로 전달하는 것이 일반적
+*/
+
 // 비동기 Thunk 액션: 영화 목록을 API로부터 가져옴
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async ({ category, page }) => {
    const response = await getMovies(category, page)

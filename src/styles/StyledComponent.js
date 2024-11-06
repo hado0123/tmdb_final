@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 
-// || 는 렌더링 연산자 X, 일반 논리 연산자
+/*
+falsy 연산
+
+[falsy 값 종류]
+false (Boolean false)
+0 (숫자 0)
+"" 또는 '' (빈 문자열)
+null
+undefined
+NaN (Not-a-Number)
+
+*/
 export const Wrap = styled.div`
    overflow: hidden;
    min-width: ${(props) => props.minWidth || '1200px'};
