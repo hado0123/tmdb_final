@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovieCredits } from '../../features/movies/moviesSlice'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 
@@ -15,13 +16,14 @@ function CreditsSlider({ movieId }) {
 
    useEffect(() => {
       dispatch(fetchMovieCredits(movieId))
-   }, [dispatch])
+   }, [dispatch, movieId])
 
    if (loading) return <p>Loading...</p>
    if (error) return <p>Error: {error}</p>
 
    return (
-      <>
+      <div className="common_margin_tb">
+         <h2>출연배우</h2>
          <Swiper
             slidesPerView={5}
             spaceBetween={30}
@@ -41,7 +43,7 @@ function CreditsSlider({ movieId }) {
                   </SwiperSlide>
                ))}
          </Swiper>
-      </>
+      </div>
    )
 }
 

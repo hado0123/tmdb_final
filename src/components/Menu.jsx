@@ -1,5 +1,5 @@
 import './css/Menu.css'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Menu() {
    return (
@@ -7,21 +7,21 @@ function Menu() {
          <nav>
             <ul>
                <li>
-                  <Link to="/">
+                  <NavLink to="/">
                      <img src="/images/logo.svg" alt="로고" width="160" />
-                  </Link>
+                  </NavLink>
                </li>
                <li>
-                  <Link to="/popular">인기영화</Link>
+                  <NavLink to="/popular">인기영화</NavLink>
                </li>
                <li>
-                  <Link to="/now_playing">현재 상영 중</Link>
+                  <NavLink to="/now_playing">현재 상영 중</NavLink>
                </li>
                <li>
-                  <Link to="/upcoming">개봉 예정</Link>
+                  <NavLink to="/upcoming">개봉 예정</NavLink>
                </li>
-               <li style={{ float: 'right' }} className="active">
-                  <Link to="/login">로그인</Link>
+               <li style={{ float: 'right' }} className="login">
+                  <NavLink to="/login">로그인</NavLink>
                </li>
             </ul>
          </nav>

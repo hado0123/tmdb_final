@@ -14,12 +14,12 @@ NaN (Not-a-Number)
 */
 export const Wrap = styled.div`
    overflow: hidden;
-   min-width: ${(props) => props.minWidth || '1200px'};
+   min-width: ${(props) => props.$minWidth || '1200px'};
 `
 
 export const Main = styled.main`
    width: ${(props) => props.width || '1200px'};
    margin: 0 auto;
    overflow: hidden;
-   padding: 30px 0;
+   padding: ${(props) => props.$padding || 0};
 `

@@ -20,40 +20,42 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async ({ categ
 export const fetchMovieDetails = createAsyncThunk('movies/fetchMovieDetails', async (movieId) => {
    const response = await getMovieDetails(movieId)
 
-   // 상세 정보에서 필요한 데이터만 반환
-   return response.data // 또는 필요한 데이터 구조에 맞게 수정
+   return response.data
 })
 
 // 출연 배우 정보 가져오기
 export const fetchMovieCredits = createAsyncThunk('movies/fetchMovieCredits', async (movieId) => {
    const response = await getMovieCredits(movieId)
 
-   // 상세 정보에서 필요한 데이터만 반환
-   return response.data // 또는 필요한 데이터 구조에 맞게 수정
+   return response.data
 })
 
 // 검색어로 영화, TV 프로그램 검색
 export const fetchSearchResults = createAsyncThunk('movies/fetchSearchResults', async ({ query, page }) => {
    const response = await searchMovie(query, page)
-   return response.data.results // API 응답에서 필요한 데이터만 반환
+   return response.data.results
 })
 
 // Slice 생성
 const moviesSlice = createSlice({
    name: 'movies',
    initialState: {
-      loading: false,
-      movies: [],
-      movieDetails: null,
-      movieCredits: [], // 출연 배우 정보를 저장할 상태 추가
-      error: null,
+      loading: false, // 로딩여부 저장할 state
+      movies: [], // 영화 정보 저장할 state
+      movieDetails: null, // 영화 상세 정보를 저장할 state
+      movieCredits: [], // 출연 배우 정보를 저장할 state
+      error: null, // 에러 메세지 저장할 state
    },
    reducers: {
       resetMovies(state) {
-         state.movies = [] // movies 상태 초기화
+         state.movies = [] // movies state 초기화
       },
    },
    extraReducers: (builder) => {
+      /*
+         promise 결과 반환
+         pending: 대기상태, fulfilled: 성공상태, rejected: 실패상태
+      */
       builder
          .addCase(fetchMovies.pending, (state) => {
             state.loading = true
@@ -71,6 +73,7 @@ const moviesSlice = createSlice({
             state.loading = false
             state.error = action.error.message
          })
+
          .addCase(fetchMovieDetails.pending, (state) => {
             state.loading = true
             state.error = null
@@ -83,6 +86,7 @@ const moviesSlice = createSlice({
             state.loading = false
             state.error = action.error.message
          })
+
          .addCase(fetchMovieCredits.pending, (state) => {
             state.loading = true
             state.error = null
@@ -95,6 +99,7 @@ const moviesSlice = createSlice({
             state.loading = false
             state.error = action.error.message
          })
+
          .addCase(fetchSearchResults.pending, (state) => {
             state.loading = true
             state.error = null

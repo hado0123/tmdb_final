@@ -22,3 +22,8 @@
    height: 100%;
    object-fit: cover;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+   color: white; /* 원하는 화살표 색상으로 변경 */
+}

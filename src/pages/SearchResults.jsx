@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom' // useParams 훅 추가
-import { fetchSearchResults } from '../features/movies/moviesSlice' // 검색용 Thunk
+import { fetchSearchResults } from '../features/movies/moviesSlice'
+
+import '../styles/common.css'
 import MovieCard from '../components/MovieCard'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { Wrap, Main } from '../styles/StyledComponent'
 import Button from '@mui/material/Button'
-import { useSearchParams } from 'react-router-dom'
 
 function SearchResults() {
-   // const { query } = useParams() // URL에서 query 파라미터 가져오기
    const [searchParams] = useSearchParams() // 쿼리 파라미터 가져오기
    const query = searchParams.get('query') // query 파라미터 값 추출
    const dispatch = useDispatch()
@@ -60,7 +60,7 @@ function SearchResults() {
    return (
       <Wrap>
          <Menu />
-         <Main>
+         <Main $padding="30px 0">
             {Array.isArray(searchResults) && searchResults.length > 0 ? (
                <>
                   <MovieCard movies={searchResults} />

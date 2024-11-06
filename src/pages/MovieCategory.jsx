@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../features/movies/moviesSlice'
 
+import '../styles/common.css'
 import MovieCard from '../components/MovieCard'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
@@ -30,7 +31,7 @@ function MovieCategory({ category }) {
       console.log({ category, page: page[category] }) // {category: 'popular', page: 1}
 
       dispatch(fetchMovies({ category, page: page[category] }))
-   }, [page, dispatch])
+   }, [page, dispatch, category])
 
    /*
    useEffect의 의존성 배열에 dispatch를 넣는 이유는 안전성을 보장하기 위해서입니다. 이와 관련된 주요 이유는 다음과 같습니다:
@@ -72,7 +73,7 @@ function MovieCategory({ category }) {
    return (
       <Wrap>
          <Menu />
-         <Main>
+         <Main $padding="30px 0">
             <MovieCard movies={movies} />
 
             <Button variant="outlined" onClick={loadMore} sx={{ margin: '20px auto', display: 'block', width: '500px' }}>
