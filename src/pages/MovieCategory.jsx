@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../features/movies/moviesSlice'
 
@@ -44,12 +44,12 @@ function MovieCategory({ category }) {
    */
 
    // 더보기를 누르면 해당 카테고리의 page state변경 -> useEffect 실행
-   const loadMore = () => {
+   const loadMore = useCallback(() => {
       setPage((prevPage) => ({
          ...prevPage,
-         [category]: prevPage[category] + 1, // 페이지를 1 증가
+         [category]: prevPage[category] + 1,
       }))
-   }
+   }, [category])
 
    if (loading && page === 1)
       return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSearchResults } from '../features/movies/moviesSlice'
@@ -33,9 +33,9 @@ function SearchResults() {
    }, [page, dispatch, query])
 
    // 더보기 버튼 클릭 시 페이지 증가
-   const loadMore = () => {
+   const loadMore = useCallback(() => {
       setPage((prevPage) => prevPage + 1)
-   }
+   }, [])
 
    if (loading && page === 1)
       return (

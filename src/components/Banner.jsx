@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import './css/Banner.css'
@@ -13,17 +13,20 @@ function Banner() {
    const navigate = useNavigate()
 
    // 검색어 입력 처리
-   const handleInputChange = (event) => {
+   const handleInputChange = useCallback((event) => {
       setSearchQuery(event.target.value)
-   }
+   }, [])
 
    // 검색 버튼 클릭 시 검색 페이지로 이동
-   const handleSearch = (event) => {
-      event.preventDefault()
-      if (searchQuery.trim()) {
-         navigate(`/search?query=${searchQuery}`) // 검색어를 query 파라미터로 전달
-      }
-   }
+   const handleSearch = useCallback(
+      (event) => {
+         event.preventDefault()
+         if (searchQuery.trim()) {
+            navigate(`/search?query=${searchQuery}`) // 검색어를 query 파라미터로 전달
+         }
+      },
+      [searchQuery]
+   )
 
    return (
       <div

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import '../styles/common.css'
 import Menu from '../components/Menu'
@@ -14,11 +14,11 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 function Home() {
    const [alignment, setAlignment] = useState('movie')
 
-   const handleChange = (event, newAlignment) => {
+   const handleChange = useCallback((event, newAlignment) => {
       if (newAlignment !== null) {
          setAlignment(newAlignment) // 선택된 버튼에 맞게 상태 업데이트
       }
-   }
+   }, [])
 
    return (
       <Wrap>
