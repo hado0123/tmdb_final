@@ -23,6 +23,7 @@ function MovieDetail() {
 
    return (
       <>
+         {/* movieDetails의 초기 state는 null이므로 movieDetails이 있을때만 값을 보여주도록 함 */}
          {movieDetails && (
             <Grid container spacing={2}>
                <Grid size={3}>

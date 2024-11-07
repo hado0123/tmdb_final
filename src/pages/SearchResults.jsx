@@ -11,6 +11,8 @@ import { Wrap, Main } from '../styles/StyledComponent'
 import Button from '@mui/material/Button'
 
 function SearchResults() {
+   // useParams 은 경로의 파라메터 값만 가져올 수 있다.
+   // useSearchParams을 사용해야 쿼리스트링에 속하는 값을 가져올 수 있다.
    const [searchParams] = useSearchParams() // 쿼리 파라미터 가져오기
    const query = searchParams.get('query') // query 파라미터 값 추출
    const dispatch = useDispatch()

@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 function Banner() {
    const [searchQuery, setSearchQuery] = useState('') // 검색어 상태 관리
+   // useNavigate: 페이지를 이동할 수 있게 해주는 훅. 특정 이벤트(예: 버튼 클릭)에서 페이지를 이동하거나, 폼 제출 후 특정 페이지로 리다이렉트할 때 유용.(SPA방식 적용)
    const navigate = useNavigate()
 
    // 검색어 입력 처리

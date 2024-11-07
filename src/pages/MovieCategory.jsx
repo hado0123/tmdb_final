@@ -12,6 +12,8 @@ import Button from '@mui/material/Button'
 function MovieCategory({ category }) {
    const dispatch = useDispatch()
    const { movies, loading, error } = useSelector((state) => state.movies)
+
+   //카테고리 page로 사용할 state 지정
    const [page, setPage] = useState({
       popular: 1,
       now_playing: 1,
@@ -34,13 +36,14 @@ function MovieCategory({ category }) {
    }, [page, dispatch, category])
 
    /*
-   useEffect의 의존성 배열에 dispatch를 넣는 이유는 안전성을 보장하기 위해서입니다. 이와 관련된 주요 이유는 다음과 같습니다:
+   useEffect의 의존성 배열에 dispatch를 넣는 이유는 안전성을 보장하기 위해서
 
-   ESLint 경고 방지: ESLint의 react-hooks/exhaustive-deps 규칙은 useEffect에서 사용하는 모든 값(예: dispatch, category, page)을 의존성 배열에 포함할 것을 권장합니다. dispatch는 Redux에서 제공하는 함수이지만, 이를 의존성 배열에 추가하지 않으면 ESLint가 경고를 표시할 수 있습니다.
+   useEffect에서 사용하는 모든 값(예: dispatch, category, page)을 의존성 배열에 포함할 것을 권장. dispatch는 Redux에서 제공하는 함수이지만, 이를 의존성 배열에 추가하지 않으면 경고를 표시.
 
-   미래의 안정성: 비록 dispatch 함수는 대부분의 경우 변하지 않지만, 만약 컴포넌트가 리렌더링되면서 새로운 dispatch 함수로 재정의되거나 변경될 경우(이런 상황은 드물지만), 이를 의존성 배열에 포함시키지 않으면 useEffect가 최신 상태의 dispatch를 사용하지 않을 수 있습니다. 즉, 이로 인해 예상치 못한 동작이 발생할 수 있습니다.
+   dispatch 함수는 대부분의 경우 변하지 않지만, 만약 컴포넌트가 리렌더링되면서 새로운 dispatch 함수로 재정의되거나 변경될 경우(이런 상황은 드물지만) useEffect가 최신 상태의 dispatch를 사용하지 않을 수 있다.
    */
 
+   // 더보기를 누르면 해당 카테고리의 page state변경 -> useEffect 실행
    const loadMore = () => {
       setPage((prevPage) => ({
          ...prevPage,

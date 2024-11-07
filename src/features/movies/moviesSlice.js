@@ -5,7 +5,7 @@ import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../../
 createAsyncThunk의 async 함수에서 매개변수로 여러 값을 받으려면, 두 가지 방식
 -객체로 전달: category와 page를 객체로 묶어서 전달하는 방법.
 -배열로 전달: category와 page를 배열로 전달하는 방법.
-현재 코드에서는 async (category, page)로 두 개의 매개변수를 전달하고 있는데, createAsyncThunk에서 payloadCreator 함수는 기본적으로 하나의 인자만 받을 수 있기 때문에 문제가 발생할 수 있음. 객체로 전달하는 것이 일반적
+현재 코드에서는 async (category, page)로 두 개의 매개변수를 전달하고 있는데, createAsyncThunk에서 함수는 기본적으로 하나의 매개변수 값만 받을 수 있기 때문에 문제가 발생할 수 있음. 객체로 전달하는 것이 일반적
 */
 
 // 비동기 Thunk 액션: 영화 목록을 API로부터 가져옴
@@ -27,6 +27,7 @@ export const fetchMovieDetails = createAsyncThunk('movies/fetchMovieDetails', as
 export const fetchMovieCredits = createAsyncThunk('movies/fetchMovieCredits', async (movieId) => {
    const response = await getMovieCredits(movieId)
 
+   console.log(response.data)
    return response.data
 })
 
@@ -40,11 +41,11 @@ export const fetchSearchResults = createAsyncThunk('movies/fetchSearchResults', 
 const moviesSlice = createSlice({
    name: 'movies',
    initialState: {
-      loading: false, // 로딩여부 저장할 state
-      movies: [], // 영화 정보 저장할 state
-      movieDetails: null, // 영화 상세 정보를 저장할 state
-      movieCredits: [], // 출연 배우 정보를 저장할 state
-      error: null, // 에러 메세지 저장할 state
+      loading: false, // 로딩여부 state
+      movies: [], // 영화 정보 state
+      movieDetails: null, // 영화 상세 정보 state
+      movieCredits: null, // 출연 배우 정보 state
+      error: null, // 에러 메세지 state
    },
    reducers: {
       resetMovies(state) {
@@ -58,20 +59,22 @@ const moviesSlice = createSlice({
       */
       builder
          .addCase(fetchMovies.pending, (state) => {
-            state.loading = true
+            state.loading = true //로딩 중
             state.error = null
          })
          .addCase(fetchMovies.fulfilled, (state, action) => {
-            state.loading = false
+            state.loading = false //로딩 완료
             if (action.meta.arg.page === 1) {
+               // 페이지가 1일때는 그냥 새로운 데이터로 state 업데이트
                state.movies = action.payload
             } else {
+               //페이지가 2 이상일때는 기존 데이터 + 새로운 데이터로 state 업데이트
                state.movies = [...state.movies, ...action.payload]
             }
          })
          .addCase(fetchMovies.rejected, (state, action) => {
             state.loading = false
-            state.error = action.error.message
+            state.error = action.error.message // 에러발생시 에러메세지 전달
          })
 
          .addCase(fetchMovieDetails.pending, (state) => {
@@ -93,7 +96,7 @@ const moviesSlice = createSlice({
          })
          .addCase(fetchMovieCredits.fulfilled, (state, action) => {
             state.loading = false
-            state.movieCredits = action.payload // 출연 배우 정보를 상태에 저장
+            state.movieCredits = action.payload
          })
          .addCase(fetchMovieCredits.rejected, (state, action) => {
             state.loading = false

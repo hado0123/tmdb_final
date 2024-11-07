@@ -24,12 +24,11 @@ function PosterSlider() {
    return (
       <>
          <Swiper slidesPerView={5} spaceBetween={30} navigation={true} modules={[Navigation]} className="mySwiper">
-            {movies &&
-               movies.map((movie) => (
-                  <SwiperSlide key={movie.id}>
-                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                  </SwiperSlide>
-               ))}
+            {movies.map((movie) => (
+               <SwiperSlide key={movie.id}>
+                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+               </SwiperSlide>
+            ))}
          </Swiper>
       </>
    )

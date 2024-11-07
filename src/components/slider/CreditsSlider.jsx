@@ -33,7 +33,8 @@ function CreditsSlider({ movieId }) {
             modules={[Scrollbar]}
             className="mySwiper"
          >
-            {movieCredits.cast &&
+            {/* movieCredits 초기 state는 null이므로 movieCredits 있을때만 값을 보여주도록 함 */}
+            {movieCredits &&
                movieCredits.cast.map((cast) => (
                   <SwiperSlide key={cast.id}>
                      <div style={{ padding: '20px' }}>
