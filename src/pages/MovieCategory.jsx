@@ -31,7 +31,6 @@ function MovieCategory({ category }) {
    // page가 변할때 마다 영화 데이터 로딩
    useEffect(() => {
       console.log({ category, page: page[category] }) // {category: 'popular', page: 1}
-
       dispatch(fetchMovies({ category, page: page[category] }))
    }, [page, dispatch, category])
 
