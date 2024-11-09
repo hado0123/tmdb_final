@@ -69,10 +69,17 @@ const moviesSlice = createSlice({
                state.movies = action.payload
             } else {
                //페이지가 2 이상일때는 기존 데이터 + 새로운 데이터로 state 업데이트
-               state.movies = [...state.movies, ...action.payload]
-               // action.payload.forEach((movie) => state.movies.push(movie))
+
                /*
-               툴킷은 불변성이 유지 되므로 아래와 같이 작성해도 된다. 다만 fulfilled가 여러번 실행되면서 데이터가 중복해서 들어가므로 아래와 같이 걸러준다. -> fulfilled가 여러번 실행 방지 어떻게 해결? -> 첫페이지 들어올때만 그렇긴함..
+               state.movies = [...state.movies, ...action.payload]와 같은 방식으로 새로운 배열을 할당하는 것은 허용되지만, state = [...state, ...]처럼 최상위 상태를 재할당하는 것은 불가능.
+               */
+               state.movies = [...state.movies, ...action.payload]
+
+               /*
+               툴킷은 불변성이 유지 되므로 아래와 같이 작성해도 된다. 
+               action.payload.forEach((movie) => state.movies.push(movie))
+               
+               다만 fulfilled가 여러번 실행되면서 데이터가 중복해서 들어가므로 아래와 같이 걸러준다. -> fulfilled가 여러번 실행 방지 어떻게 해결? -> 첫페이지 들어올때만 그렇긴함..
                action.payload.forEach((movie) => {
                   if (!state.movies.some((existingMovie) => existingMovie.id === movie.id)) {
                      state.movies.push(movie)
