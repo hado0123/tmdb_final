@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../features/movies/moviesSlice'
 
@@ -20,8 +20,15 @@ function MovieCategory({ category }) {
       upcoming: 1,
    })
 
+   const isFirstLoad = useRef(true)
+
    // 카테고리가 변경될 때 페이지를 1로 초기화
    useEffect(() => {
+      if (isFirstLoad.current) {
+         isFirstLoad.current = false
+         return
+      }
+
       setPage((prevPage) => ({
          ...prevPage,
          [category]: 1, // 페이지를 1로 초기화
@@ -32,7 +39,8 @@ function MovieCategory({ category }) {
    useEffect(() => {
       console.log({ category, page: page[category] }) // {category: 'popular', page: 1}
       dispatch(fetchMovies({ category, page: page[category] }))
-   }, [page, dispatch, category])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [dispatch, page])
 
    /*
    useEffect의 의존성 배열에 dispatch를 넣는 이유는 안전성을 보장하기 위해서
