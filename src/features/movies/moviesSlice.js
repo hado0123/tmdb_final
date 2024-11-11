@@ -80,6 +80,9 @@ const moviesSlice = createSlice({
                action.payload.forEach((movie) => state.movies.push(movie))
                
                다만 fulfilled가 여러번 실행되면서 데이터가 중복해서 들어가므로 아래와 같이 걸러준다. -> fulfilled가 여러번 실행 방지 해결필요(첫페이지 들어올때만 그렇긴함) -> useEffect 조정
+
+               useEffect조정 이후에도 종종 중복되서 들어가는 이유는 인기영화, 현재 상영 중, 개봉예정 영화 중 겹치는 영화들이 존재한다. 따라서 아래와 같이 id가 같은 영화는 필터링을 진행을 해줘야 한다
+               
                action.payload.forEach((movie) => {
                   if (!state.movies.some((existingMovie) => existingMovie.id === movie.id)) {
                      state.movies.push(movie)
