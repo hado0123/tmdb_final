@@ -79,7 +79,7 @@ const moviesSlice = createSlice({
                툴킷은 불변성이 유지 되므로 아래와 같이 작성해도 된다. 
                action.payload.forEach((movie) => state.movies.push(movie))
                
-               다만 fulfilled가 여러번 실행되면서 데이터가 중복해서 들어가므로 아래와 같이 걸러준다. -> fulfilled가 여러번 실행 방지 어떻게 해결? -> 첫페이지 들어올때만 그렇긴함..
+               다만 fulfilled가 여러번 실행되면서 데이터가 중복해서 들어가므로 아래와 같이 걸러준다. -> fulfilled가 여러번 실행 방지 해결필요(첫페이지 들어올때만 그렇긴함) -> useEffect 조정
                action.payload.forEach((movie) => {
                   if (!state.movies.some((existingMovie) => existingMovie.id === movie.id)) {
                      state.movies.push(movie)
