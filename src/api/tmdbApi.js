@@ -59,7 +59,7 @@ export const getTVs = (type, page = 1) => {
    // type에 따라 엔드포인트 동적으로 설정
    const endpoint = {
       popular: '/tv/popular',
-      nowPlaying: '/tv/on_the_air',
+      on_the_air: '/tv/on_the_air',
    }[type]
 
    return fetchFromApi(endpoint, {

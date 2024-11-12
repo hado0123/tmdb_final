@@ -2,8 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import './css/Banner.css'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import { Button, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 //https://mui.com/material-ui/react-text-field/#full-width
 
@@ -25,7 +24,7 @@ function Banner() {
             navigate(`/search?query=${searchQuery}`) // 검색어를 query 파라미터로 전달
          }
       },
-      [searchQuery]
+      [searchQuery, navigate]
    )
 
    return (

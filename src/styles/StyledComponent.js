@@ -18,7 +18,7 @@ export const Wrap = styled.div`
 `
 
 export const Main = styled.main`
-   width: ${(props) => props.width || '1200px'};
+   width: ${(props) => props.$width || '1200px'};
    margin: 0 auto;
    overflow: hidden;
    padding: ${(props) => props.$padding || 0};

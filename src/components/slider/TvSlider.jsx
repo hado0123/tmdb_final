@@ -15,7 +15,7 @@ function TvSlider() {
    const { tvs, loading, error } = useSelector((state) => state.tvs)
 
    useEffect(() => {
-      dispatch(fetchTVs('nowPlaying'))
+      dispatch(fetchTVs('on_the_air'))
    }, [dispatch])
 
    if (loading) return <p>Loading...</p>
