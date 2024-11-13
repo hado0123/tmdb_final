@@ -21,7 +21,7 @@ function SearchResults() {
 
    // 검색어가 변경될 때마다 페이지와 검색 결과 초기화 및 새로운 검색 실행
    useEffect(() => {
-      setPage(1) // 페이지 초기화
+      // setPage(1) // 페이지 초기화
       dispatch(fetchSearchResults({ query, page: 1 })) // 검색어와 함께 검색 실행
    }, [query, dispatch])
 
@@ -63,7 +63,7 @@ function SearchResults() {
       <Wrap>
          <Menu />
          <Main $padding="30px 0">
-            {Array.isArray(searchResults) && searchResults.length > 0 ? (
+            {searchResults.length > 0 ? (
                <>
                   <MovieCard movies={searchResults} />
                   <Button variant="outlined" onClick={loadMore} sx={{ margin: '20px auto', display: 'block', width: '500px' }}>

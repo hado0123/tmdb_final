@@ -42,6 +42,7 @@ const moviesSlice = createSlice({
       movies: [], // 영화 정보 state
       movieDetails: null, // 영화 상세 정보 state
       movieCredits: null, // 출연 배우 정보 state
+      searchResults: [], //검색 결과 state
       error: null, // 에러 메세지 state
    },
    reducers: {
