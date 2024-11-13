@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating'
 function MovieDetail() {
    const { movieId } = useParams()
    const dispatch = useDispatch()
-   const { movieDetails, status, error } = useSelector((state) => state.movies)
+   const { movieDetails, loading, error } = useSelector((state) => state.movies)
 
    useEffect(() => {
       if (movieId) {
@@ -18,12 +18,12 @@ function MovieDetail() {
       }
    }, [dispatch, movieId])
 
-   if (status === 'loading') return <div>Loading...</div>
-   if (status === 'failed') return <div>Error: {error}</div>
+   if (loading) return <p>Loading...</p>
+   if (error) return <p>Error: {error}</p>
 
    return (
       <>
-         {/* movieDetails의 초기 state는 null이므로 movieDetails이 있을때만 값을 보여주도록 함 */}
+         {/* movieDetails의 초기 state는 null이므로 movieDetails이 있을때만 값을 보여주도록 함(비동기 통신으로 인해 발생하는 문제) */}
          {movieDetails && (
             <Grid container spacing={2}>
                <Grid size={3}>

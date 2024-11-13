@@ -1,10 +1,11 @@
 // https://swiperjs.com/demos#slides-per-view
+// https://swiperjs.com/demos#autoplay
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovieCredits } from '../../features/movies/moviesSlice'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Scrollbar } from 'swiper/modules'
+import { Scrollbar, Autoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
@@ -15,7 +16,9 @@ function CreditsSlider({ movieId }) {
    const { movieCredits, loading, error } = useSelector((state) => state.movies)
 
    useEffect(() => {
-      dispatch(fetchMovieCredits(movieId))
+      if (movieId) {
+         dispatch(fetchMovieCredits(movieId))
+      }
    }, [dispatch, movieId])
 
    if (loading) return <p>Loading...</p>
@@ -30,14 +33,17 @@ function CreditsSlider({ movieId }) {
             scrollbar={{
                hide: false,
             }}
-            modules={[Scrollbar]}
+            autoplay={{
+               delay: 3000, //3초
+               disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Scrollbar]}
             className="mySwiper"
          >
-            {/* movieCredits 초기 state는 null이므로 movieCredits 있을때만 값을 보여주도록 함 */}
             {movieCredits &&
                movieCredits.cast.map((cast) => (
                   <SwiperSlide key={cast.id}>
-                     <div style={{ padding: '20px' }}>
+                     <div style={{ padding: 20 }}>
                         <img src={cast.profile_path ? `https://image.tmdb.org/t/p/w200${cast.profile_path}` : '/images/person.png'} alt={cast.name} />
                         <p style={{ fontWeight: 'bold' }}>{cast.name}</p>
                      </div>
