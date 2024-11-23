@@ -21,9 +21,9 @@ function MovieDetail() {
    if (loading) return <p>Loading...</p>
    if (error) return <p>Error: {error}</p>
 
+   // 맨처음 렌더링 발생시 movieDetails의 초기 state는 null ->  렌더링 이후 useEffect 가 실행되면서 movieDetails값이 들어옴 -> && 렌더링 연산자를 이용해 movieDetails 값이 있을때만 보여주도록 함
    return (
       <>
-         {/* movieDetails의 초기 state는 null이므로 movieDetails이 있을때만 값을 보여주도록 함(비동기 통신으로 인해 발생하는 문제) */}
          {movieDetails && (
             <Grid container spacing={2}>
                <Grid size={3}>
